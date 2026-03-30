@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PCA Mobile — Multi-Page Preview</title>
+    <link rel="icon" type="image/png" href="assets/images/logo/Favicon_New_300-80x80.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <style>
+        .fade-in { opacity: 1; transform: translateY(0); }
+        .page-tab { display: none; }
+        .page-tab.active { display: block; }
+        .tab-bar {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 2000;
+            background: #0a0f1a; border-bottom: 2px solid var(--color-accent);
+            display: flex; justify-content: center; gap: 0;
+            font-family: var(--font-body);
+        }
+        .tab-bar button {
+            background: none; border: none; color: var(--color-text-muted);
+            padding: 0.75rem 1.5rem; font-size: 0.875rem; font-weight: 600;
+            cursor: pointer; transition: all 0.2s; font-family: inherit;
+            border-bottom: 2px solid transparent; margin-bottom: -2px;
+        }
+        .tab-bar button:hover { color: #fff; }
+        .tab-bar button.active {
+            color: var(--color-accent); border-bottom-color: var(--color-accent);
+        }
+        .site-header { top: 42px !important; }
+        .hero, .page-hero { padding-top: 10rem; }
+    </style>
+</head>
+<body>
+
+<!-- Tab Bar -->
+<div class="tab-bar">
+    <button class="active" data-page="home">Home</button>
+    <button data-page="plattform">SERIWA</button>
+    <button data-page="services">Services</button>
+    <button data-page="unternehmen">Unternehmen</button>
+    <button data-page="kontakt">Kontakt</button>
+</div>
+
+<!-- Header -->
+<header class="site-header scrolled" role="banner">
+    <div class="header__inner">
+        <a href="#" class="site-logo">
+            <img src="assets/images/logo/pcamobile_nav.png" alt="PCA Mobile" class="site-logo__img">
+        </a>
+        <nav class="nav-menu" role="navigation">
+            <a href="#" onclick="switchPage('plattform');return false;">SERIWA</a>
+            <a href="#" onclick="switchPage('services');return false;">Services</a>
+            <a href="#" onclick="switchPage('unternehmen');return false;">Unternehmen</a>
+            <a href="#" onclick="switchPage('kontakt');return false;">Kontakt</a>
+            <a href="#" onclick="switchPage('kontakt');return false;" class="btn btn-primary">Demo anfragen</a>
+        </nav>
+        <button class="nav-toggle" aria-label="Menü öffnen">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</header>
+
+<!-- ==================== PAGE: HOME ==================== -->
+<div class="page-tab active" id="page-home">
+<main role="main">
+
+    <!-- Hero Split -->
+    <section class="hero hero--split section">
+        <canvas id="hero-noise" class="hero__shader"></canvas>
+        <canvas id="hero-beams" class="hero__shader hero__shader--beams"></canvas>
+        <div class="container">
+            <div class="hero__content fade-in">
+                <div class="hero__badge">Seit 20+ Jahren am Markt</div>
+                <h1>Enterprise Mobility.<br><span class="text-gradient">Neu gedacht.</span></h1>
+                <p class="hero__subtitle">SERIWA verbindet Ihre ERP-Systeme mit dem Außendienst — in Echtzeit, auf jedem Gerät, in jeder Branche.</p>
+                <div class="hero__actions">
+                    <a href="#" onclick="switchPage('kontakt');return false;" class="btn btn-primary">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 10l5 5-5 5"/><path d="M4 4v7a4 4 0 004 4h12"/></svg>
+                        Demo anfragen
+                    </a>
+                    <a href="#" onclick="switchPage('plattform');return false;" class="btn btn-ghost">Plattform entdecken</a>
+                </div>
+            </div>
+            <div class="hero__image fade-in">
+                <img src="assets/images/products/tablet_SWO-2.png" alt="SERIWA auf Tablet">
+            </div>
+        </div>
+    </section>
+
+    <!-- Trusted By -->
+    <section class="trusted section--light-alt">
+        <div class="container fade-in">
+            <p class="trusted__text">Vertrauen von führenden Unternehmen</p>
+            <div class="trusted__logos">
+                <img src="assets/images/partners/DigitalerMittelstand.png" alt="Digitaler Mittelstand" loading="lazy">
+                <img src="assets/images/partners/Logo_0001_Ebene-16.png" alt="Partner" loading="lazy">
+                <img src="assets/images/partners/Logo_0011_Ebene-6.png" alt="Partner" loading="lazy">
+                <img src="assets/images/partners/Logo_0008_Ebene-9.png" alt="Partner" loading="lazy">
+                <img src="assets/images/partners/Logo_0006_Ebene-12.png" alt="Partner" loading="lazy">
+            </div>
+        </div>
+    </section>
+
+    <!-- Solutions -->
+    <section class="section section--dark">
+        <div class="container">
+            <div class="section__header fade-in">
+                <h2>Ihre Herausforderung.<br><span class="text-gradient">Unsere Lösung.</span></h2>
+                <p>Wir digitalisieren Ihre mobilen Geschäftsprozesse — durchgängig und effizient.</p>
+            </div>
+            <div class="solutions__grid">
+                <div class="solution-card fade-in">
+                    <div class="solution-card__icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/></svg></div>
+                    <h3>Medienbrüche eliminieren</h3>
+                    <p>Alle Daten fließen digital vom Außendienst direkt ins ERP — ohne Umwege und Fehlerquellen.</p>
+                </div>
+                <div class="solution-card fade-in">
+                    <div class="solution-card__icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+                    <h3>Echtzeit-Kommunikation</h3>
+                    <p>Aufträge und Statusmeldungen in Echtzeit. Ihre Teams sind immer auf dem neuesten Stand.</p>
+                </div>
+                <div class="solution-card fade-in">
+                    <div class="solution-card__icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4"/></svg></div>
+                    <h3>Prozesse digitalisieren</h3>
+                    <p>Komplette Workflows mobil abbilden — individuell konfigurierbar, ohne Programmieraufwand.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Teaser -->
+    <section class="section section--light">
+        <div class="container">
+            <div class="section__header fade-in">
+                <h2>Eine Plattform.<br><span class="text-gradient">Alle Prozesse.</span></h2>
+                <p>SERIWA passt sich exakt an Ihre Anforderungen an.</p>
+            </div>
+            <div class="features__grid">
+                <div class="feature-card fade-in">
+                    <div class="feature-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 14l2 2 4-4"/></svg></div>
+                    <h3>Auftragsmanagement</h3>
+                    <p>Aufträge mobil empfangen, bearbeiten und abschließen.</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="10" r="3"/><path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 10-16 0c0 3 2.7 7 8 11.7z"/></svg></div>
+                    <h3>Routenplanung</h3>
+                    <p>Intelligente Tourenoptimierung für kürzere Wege.</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+                    <h3>Zeiterfassung</h3>
+                    <p>Projektbezogene Zeiterfassung mit Start/Stopp.</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg></div>
+                    <h3>ERP-Integration</h3>
+                    <p>SAP, Microsoft Dynamics, Sage und mehr.</p>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 3rem;" class="fade-in">
+                <a href="#" onclick="switchPage('plattform');return false;" class="btn btn-primary">Alle Features entdecken →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Industries -->
+    <section class="section section--dark">
+        <div class="container">
+            <div class="section__header fade-in">
+                <h2>Maßgeschneidert für <span class="text-gradient">Ihre Branche.</span></h2>
+                <p>Branchenspezifische Module — vorkonfiguriert und sofort einsatzbereit.</p>
+            </div>
+            <div class="industries__grid">
+                <div class="industry-card fade-in"><span class="industry-card__icon">🏢</span><h3>Facility Management</h3></div>
+                <div class="industry-card fade-in"><span class="industry-card__icon">🚛</span><h3>Logistik</h3></div>
+                <div class="industry-card fade-in"><span class="industry-card__icon">⚙️</span><h3>Maschinenbau</h3></div>
+                <div class="industry-card fade-in"><span class="industry-card__icon">🛒</span><h3>Handel & E-Commerce</h3></div>
+                <div class="industry-card fade-in"><span class="industry-card__icon">🏥</span><h3>Gesundheitswesen</h3></div>
+                <div class="industry-card fade-in"><span class="industry-card__icon">🔌</span><h3>Installation & Elektro</h3></div>
+                <div class="industry-card fade-in"><span class="industry-card__icon">🛡️</span><h3>Sicherheitsdienste</h3></div>
+                <div class="industry-card fade-in"><span class="industry-card__icon">📡</span><h3>Telekommunikation</h3></div>
+                <div class="industry-card fade-in"><span class="industry-card__icon">🔧</span><h3>Sanitärtechnik</h3></div>
+                <div class="industry-card fade-in"><span class="industry-card__icon">🏗️</span><h3>Bauwesen</h3></div>
+                <div class="industry-card fade-in"><span class="industry-card__icon">🌬️</span><h3>Windenergie</h3></div>
+                <div class="industry-card fade-in"><span class="industry-card__icon">🏠</span><h3>Wohnungsabnahme</h3></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="section section--light-alt stats">
+        <div class="container">
+            <div class="section__header fade-in"><h2>Zahlen, die für sich sprechen.</h2></div>
+            <div class="stats__grid fade-in">
+                <div class="stat-item"><div class="stat-item__number">20+</div><div class="stat-item__label">Jahre Erfahrung</div></div>
+                <div class="stat-item"><div class="stat-item__number">500+</div><div class="stat-item__label">Implementierungen</div></div>
+                <div class="stat-item"><div class="stat-item__number">99,95%</div><div class="stat-item__label">Verfügbarkeit</div></div>
+                <div class="stat-item"><div class="stat-item__number">12+</div><div class="stat-item__label">Branchen</div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section cta-section">
+        <div class="container">
+            <div class="cta-section__content fade-in">
+                <h2>Bereit für den nächsten Schritt?</h2>
+                <p>Testen Sie SERIWA 30 Tage kostenlos — unverbindlich und ohne Risiko.</p>
+                <a href="#" onclick="switchPage('kontakt');return false;" class="btn">Jetzt kostenlos testen</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- News -->
+    <section class="section section--light">
+        <div class="container">
+            <div class="section__header fade-in"><h2>Aktuelles</h2><p>Neuigkeiten und Trends rund um Enterprise Mobility.</p></div>
+            <div class="news__grid">
+                <article class="news-card fade-in">
+                    <div class="news-card__image"></div>
+                    <div class="news-card__body">
+                        <span class="news-card__date">30. Mär 2026</span>
+                        <h3><a href="#">Digitale Wertschöpfungsketten im Außendienst</a></h3>
+                        <p>Wie SERIWA durchgängige digitale Prozesse vom Innendienst bis zum Techniker ermöglicht.</p>
+                        <span class="news-card__link">Weiterlesen →</span>
+                    </div>
+                </article>
+                <article class="news-card fade-in">
+                    <div class="news-card__image"></div>
+                    <div class="news-card__body">
+                        <span class="news-card__date">25. Mär 2026</span>
+                        <h3><a href="#">Neues Modul: Projektmanagement</a></h3>
+                        <p>Komplexe Projekte mobil steuern — mit Meilensteinen und Echtzeit-Reporting.</p>
+                        <span class="news-card__link">Weiterlesen →</span>
+                    </div>
+                </article>
+                <article class="news-card fade-in">
+                    <div class="news-card__image"></div>
+                    <div class="news-card__body">
+                        <span class="news-card__date">18. Mär 2026</span>
+                        <h3><a href="#">Mobile Datenerfassung im Gesundheitswesen</a></h3>
+                        <p>Best Practices für die digitale Dokumentation im ambulanten Pflegedienst.</p>
+                        <span class="news-card__link">Weiterlesen →</span>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Teaser -->
+    <section class="section section--dark">
+        <div class="container">
+            <div class="section__header fade-in"><h2>Sprechen Sie mit uns.</h2><p>Ob Demo, Beratung oder konkretes Projekt — wir sind für Sie da.</p></div>
+            <div style="text-align: center;" class="fade-in">
+                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                    <a href="#" onclick="switchPage('kontakt');return false;" class="btn btn-primary">Kontakt aufnehmen</a>
+                    <a href="tel:+4921193679060" class="btn btn-ghost">+49 (0) 211 936 790 60</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+</div>
+
+<!-- ==================== PAGE: PLATTFORM ==================== -->
+<div class="page-tab" id="page-plattform">
+<main role="main">
+
+    <!-- Hero -->
+    <section class="page-hero page-hero--split">
+        <div class="container">
+            <div class="page-hero__content fade-in">
+                <h1>Die web-gestützte Softwarelösung für Ihre Serviceorganisation.</h1>
+                <p>Heute bestellt. Morgen läuft's.</p>
+            </div>
+            <div class="page-hero__image fade-in">
+                <img src="assets/images/products/Mac_Planung_Front_550.png" alt="SERIWA Planboard">
+            </div>
+        </div>
+    </section>
+
+    <!-- Performance Stats -->
+    <section class="section section--light-alt stats stats--performance">
+        <div class="container">
+            <div class="stats__grid fade-in">
+                <div class="stat-item"><div class="stat-item__number">80%</div><div class="stat-item__label">Reduzierung Verwaltungsaufwand</div></div>
+                <div class="stat-item"><div class="stat-item__number">21%</div><div class="stat-item__label">Mehr Serviceeinsätze</div></div>
+                <div class="stat-item"><div class="stat-item__number">20%</div><div class="stat-item__label">Weniger Fahrzeit</div></div>
+                <div class="stat-item"><div class="stat-item__number">38%</div><div class="stat-item__label">Weniger Folgeeinsätze</div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="section section--light">
+        <div class="container">
+            <div class="section__header fade-in">
+                <h2>SERIWA im Detail.</h2>
+                <p>Zwei Komponenten — eine Lösung: Leitstelle und App für nahtlose Zusammenarbeit.</p>
+            </div>
+
+            <!-- Feature 1 -->
+            <div class="feature-showcase fade-in">
+                <div class="feature-showcase__image"><img src="assets/images/products/sldr_planung_4.png" alt="Auftragsplanung"></div>
+                <div class="feature-showcase__text">
+                    <h3>Auftragsplanung</h3>
+                    <p>Das grafische Planboard ermöglicht die intuitive Zuweisung von Aufträgen per Drag & Drop.</p>
+                    <ul>
+                        <li>Grafisches Dispositionsboard</li>
+                        <li>Echtzeit-Statusübersicht</li>
+                        <li>Automatische Kapazitätsplanung</li>
+                        <li>Drag & Drop Auftragsverteilung</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Feature 2 -->
+            <div class="feature-showcase feature-showcase--reversed fade-in">
+                <div class="feature-showcase__image"><img src="assets/images/products/Auftragsuebersicht_Links_450.png" alt="Auftragsbearbeitung"></div>
+                <div class="feature-showcase__text">
+                    <h3>Auftragsbearbeitung</h3>
+                    <p>Mobile Techniker erhalten priorisierte Informationen und schließen Aufträge digital ab.</p>
+                    <ul>
+                        <li>Prioritätsgefilterter Auftragseingang</li>
+                        <li>Fotodokumentation vor Ort</li>
+                        <li>Digitale Kundenunterschrift</li>
+                        <li>Sofortige ERP-Rückmeldung</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Feature 3 -->
+            <div class="feature-showcase fade-in">
+                <div class="feature-showcase__image"><img src="assets/images/products/Arbeitszeiten.png" alt="Zeiterfassung"></div>
+                <div class="feature-showcase__text">
+                    <h3>Zeiterfassung</h3>
+                    <p>Projektbezogene Erfassung mit automatischer Zuordnung zu Verträgen und Abrechnungen.</p>
+                    <ul>
+                        <li>Start/Stopp-Funktion</li>
+                        <li>Automatische Auftragszuordnung</li>
+                        <li>Export in Lohnbuchhaltung</li>
+                        <li>Produktivitäts-Tracking</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Feature 4 -->
+            <div class="feature-showcase feature-showcase--reversed fade-in">
+                <div class="feature-showcase__image"><img src="assets/images/products/UFormulare-495x400.png" alt="Formulare & Checklisten"></div>
+                <div class="feature-showcase__text">
+                    <h3>Formulare & Checklisten</h3>
+                    <p>Dynamischer Formular-Editor mit logikbasierten Workflows.</p>
+                    <ul>
+                        <li>Logikbasierter Formular-Editor</li>
+                        <li>Kunden-Feedback-Integration</li>
+                        <li>Adaptive Workflows</li>
+                        <li>PDF-Export & Versand</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Feature 5-8: Icon-based -->
+            <div class="features__grid" style="margin-top: 4rem;">
+                <div class="feature-card fade-in">
+                    <div class="feature-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="10" r="3"/><path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 10-16 0c0 3 2.7 7 8 11.7z"/></svg></div>
+                    <h3>Routenoptimierung</h3>
+                    <p>Kosten-, zeit- und entfernungsoptimierte Tourenplanung unter Berücksichtigung von SLA-Anforderungen.</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><path d="M3.27 6.96L12 12.01l8.73-5.05"/><path d="M12 22.08V12"/></svg></div>
+                    <h3>Ersatzteilmanagement</h3>
+                    <p>Mobile Bestandsverwaltung mit automatischen Warnungen bei Mindestmengenunterschreitung.</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg></div>
+                    <h3>Analyse & Auswertung</h3>
+                    <p>Konfigurierbare Reports und Dashboards für KPIs und SLA-Dokumentation.</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
+                    <h3>Kunden & Partner</h3>
+                    <p>Kundenportale, Self-Service-Terminbuchung und Partner-Schnittstellen.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ERP -->
+    <section class="section section--dark">
+        <div class="container">
+            <div class="section__header fade-in">
+                <h2>Nahtlose <span class="text-gradient">ERP-Integration.</span></h2>
+                <p>Zertifizierte Schnittstellen zu führenden ERP-Systemen.</p>
+            </div>
+            <div class="partners__logos fade-in">
+                <img src="assets/images/partners/DigitalerMittelstand.png" alt="Digitaler Mittelstand">
+                <img src="assets/images/partners/Logo_0001_Ebene-16.png" alt="Partner">
+                <img src="assets/images/partners/Logo_0011_Ebene-6.png" alt="Partner">
+                <img src="assets/images/partners/Logo_0008_Ebene-9.png" alt="Partner">
+                <img src="assets/images/partners/Logo_0006_Ebene-12.png" alt="Partner">
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section cta-section">
+        <div class="container"><div class="cta-section__content fade-in">
+            <h2>Bereit für den nächsten Schritt?</h2>
+            <p>Testen Sie SERIWA 30 Tage kostenlos — unverbindlich und ohne Risiko.</p>
+            <a href="#" onclick="switchPage('kontakt');return false;" class="btn">Jetzt kostenlos testen</a>
+        </div></div>
+    </section>
+
+</main>
+</div>
+
+<!-- ==================== PAGE: SERVICES ==================== -->
+<div class="page-tab" id="page-services">
+<main role="main">
+
+    <section class="page-hero">
+        <div class="container"><div class="page-hero__content fade-in">
+            <h1>Unsere Services.</h1>
+            <p>Innovativ. Integrativ. Intuitiv. Smart. — Von der Beratung bis zum laufenden Betrieb.</p>
+        </div></div>
+    </section>
+
+    <!-- Service Cards -->
+    <section class="section section--light">
+        <div class="container">
+            <div class="solutions__grid" style="grid-template-columns: repeat(2, 1fr);">
+                <div class="solution-card fade-in" style="background: #fff; border-color: rgba(0,0,0,0.06);">
+                    <div class="solution-card__icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg></div>
+                    <h3 style="color: var(--color-text-dark);">Consulting</h3>
+                    <p style="color: var(--color-text-dark-muted);">Workflow-Entwicklung, Technologiemigration und Systemintegration. Maßgeschneiderte Digitalisierungsstrategien.</p>
+                </div>
+                <div class="solution-card fade-in" style="background: #fff; border-color: rgba(0,0,0,0.06);">
+                    <div class="solution-card__icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
+                    <h3 style="color: var(--color-text-dark);">Enterprise Mobility Management</h3>
+                    <p style="color: var(--color-text-dark-muted);">Geräteverwaltung (MDM), Konfiguration und Sicherheitsprotokolle für Ihren mobilen Außendienst.</p>
+                </div>
+                <div class="solution-card fade-in" style="background: #fff; border-color: rgba(0,0,0,0.06);">
+                    <div class="solution-card__icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg></div>
+                    <h3 style="color: var(--color-text-dark);">Hardware as a Service</h3>
+                    <p style="color: var(--color-text-dark-muted);">Monatliches Mietmodell inklusive MDM, SLA-Abdeckung und Geräte-Tauschpool.</p>
+                </div>
+                <div class="solution-card fade-in" style="background: #fff; border-color: rgba(0,0,0,0.06);">
+                    <div class="solution-card__icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg></div>
+                    <h3 style="color: var(--color-text-dark);">Hardware</h3>
+                    <p style="color: var(--color-text-dark-muted);">Beschaffung, Staging und Rollout robuster Industriegeräte für jeden Einsatzbereich.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Detail Steps -->
+    <section class="section section--dark">
+        <div class="container">
+            <div class="section__header fade-in">
+                <h2>Von der Beratung bis zum <span class="text-gradient">laufenden Betrieb.</span></h2>
+                <p>Unser Full-Service-Ansatz begleitet Sie durch den gesamten Lebenszyklus.</p>
+            </div>
+            <div class="service-detail__list fade-in">
+                <div class="service-detail__item">
+                    <div class="service-detail__item-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></div>
+                    <div><strong style="color: #fff;">Analyse & Konzeption</strong><p style="color: var(--color-text-muted); margin: 0.25rem 0 0; font-size: 0.9375rem;">Wir analysieren Ihre Geschäftsprozesse und entwickeln eine Roadmap für die Digitalisierung.</p></div>
+                </div>
+                <div class="service-detail__item">
+                    <div class="service-detail__item-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0"/></svg></div>
+                    <div><strong style="color: #fff;">Konfiguration & Integration</strong><p style="color: var(--color-text-muted); margin: 0.25rem 0 0; font-size: 0.9375rem;">SERIWA wird an Ihre Anforderungen angepasst und in Ihre ERP-Landschaft integriert.</p></div>
+                </div>
+                <div class="service-detail__item">
+                    <div class="service-detail__item-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg></div>
+                    <div><strong style="color: #fff;">Hardware-Bereitstellung</strong><p style="color: var(--color-text-muted); margin: 0.25rem 0 0; font-size: 0.9375rem;">Auswahl, Beschaffung und Konfiguration robuster Endgeräte aus einer Hand.</p></div>
+                </div>
+                <div class="service-detail__item">
+                    <div class="service-detail__item-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+                    <div><strong style="color: #fff;">Schulung & Go-Live</strong><p style="color: var(--color-text-muted); margin: 0.25rem 0 0; font-size: 0.9375rem;">Umfassende Schulungen und begleiteter Go-Live mit persönlichem Ansprechpartner.</p></div>
+                </div>
+                <div class="service-detail__item">
+                    <div class="service-detail__item-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+                    <div><strong style="color: #fff;">Betrieb & Support</strong><p style="color: var(--color-text-muted); margin: 0.25rem 0 0; font-size: 0.9375rem;">99,95% Verfügbarkeit, redundante Systeme und SLA-basierter Support.</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section cta-section">
+        <div class="container"><div class="cta-section__content fade-in">
+            <h2>Bereit für den nächsten Schritt?</h2>
+            <p>Testen Sie SERIWA 30 Tage kostenlos.</p>
+            <a href="#" onclick="switchPage('kontakt');return false;" class="btn">Jetzt kostenlos testen</a>
+        </div></div>
+    </section>
+
+</main>
+</div>
+
+<!-- ==================== PAGE: UNTERNEHMEN ==================== -->
+<div class="page-tab" id="page-unternehmen">
+<main role="main">
+
+    <section class="page-hero">
+        <div class="container"><div class="page-hero__content fade-in">
+            <h1>PCA Mobile GmbH</h1>
+            <p>Enterprise Mobility Solutions seit über 20 Jahren. Ihr Partner für digitale Prozesse im Außendienst.</p>
+        </div></div>
+    </section>
+
+    <!-- Story -->
+    <section class="section section--light">
+        <div class="container">
+            <div class="company-story fade-in">
+                <p>PCA Mobile ist eines der führenden Unternehmen für Enterprise Mobility Solutions (EMS). Wir sind spezialisiert auf die Entwicklung und den Vertrieb mobiler Softwarelösungen für Logistik, Service und Außendienst.</p>
+                <p>Mit SERIWA haben wir eine Field-Service-Software entwickelt, die die Vorteile von Individualentwicklung, Standardlösung und modularem Baukastensystem vereint. Die Funktionalität lässt sich ohne Programmierkenntnisse erweitern — flexibel und zukunftssicher.</p>
+                <p>Unser Pay-per-Use-Modell bedeutet: Sie zahlen nur für die Funktionen, die Sie tatsächlich nutzen. Cloud-optimiert als SaaS-Lösung, skalierbar mit Ihrem Wachstum.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values -->
+    <section class="section section--light-alt">
+        <div class="container">
+            <div class="section__header fade-in"><h2>Was uns <span class="text-gradient">auszeichnet.</span></h2></div>
+            <div class="values__grid">
+                <div class="value-card fade-in">
+                    <div class="value-card__icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+                    <h3>Innovation</h3>
+                    <p>Wir durchbrechen Technologiegrenzen und integrieren Kundenfeedback in die Produktentwicklung.</p>
+                </div>
+                <div class="value-card fade-in">
+                    <div class="value-card__icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+                    <h3>Zuverlässigkeit</h3>
+                    <p>99,95% Systemverfügbarkeit, redundante Infrastruktur und Security-Monitoring.</p>
+                </div>
+                <div class="value-card fade-in">
+                    <div class="value-card__icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82"/></svg></div>
+                    <h3>Branchenkompetenz</h3>
+                    <p>Tiefes Verständnis für über 12 Branchen — von Facility Management bis Windenergie.</p>
+                </div>
+                <div class="value-card fade-in">
+                    <div class="value-card__icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/></svg></div>
+                    <h3>Partnerschaft</h3>
+                    <p>Langfristige Kundenbeziehungen. 25% Kundenwachstum durch Empfehlung.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="section section--light stats">
+        <div class="container">
+            <div class="section__header fade-in"><h2>Zahlen, die für sich sprechen.</h2></div>
+            <div class="stats__grid fade-in">
+                <div class="stat-item"><div class="stat-item__number">20+</div><div class="stat-item__label">Jahre Erfahrung</div></div>
+                <div class="stat-item"><div class="stat-item__number">500+</div><div class="stat-item__label">Implementierungen</div></div>
+                <div class="stat-item"><div class="stat-item__number">99,95%</div><div class="stat-item__label">Verfügbarkeit</div></div>
+                <div class="stat-item"><div class="stat-item__number">1,35 Mio.</div><div class="stat-item__label">Bearbeitete Aufträge</div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Industries -->
+    <section class="section section--dark">
+        <div class="container">
+            <div class="section__header fade-in"><h2>Maßgeschneidert für <span class="text-gradient">Ihre Branche.</span></h2></div>
+            <div class="industries__grid">
+                <div class="industry-card fade-in"><span class="industry-card__icon">🏢</span><h3>Facility Management</h3></div>
+                <div class="industry-card fade-in"><span class="industry-card__icon">🚛</span><h3>Logistik</h3></div>
+                <div class="industry-card fade-in"><span class="industry-card__icon">⚙️</span><h3>Maschinenbau</h3></div>
+                <div class="industry-card fade-in"><span class="industry-card__icon">🛒</span><h3>Handel & E-Commerce</h3></div>
+                <div class="industry-card fade-in"><span class="industry-card__icon">🏥</span><h3>Gesundheitswesen</h3></div>
+                <div class="industry-card fade-in"><span class="industry-card__icon">🔌</span><h3>Installation & Elektro</h3></div>
+                <div class="industry-card fade-in"><span class="industry-card__icon">🛡️</span><h3>Sicherheitsdienste</h3></div>
+                <div class="industry-card fade-in"><span class="industry-card__icon">📡</span><h3>Telekommunikation</h3></div>
+                <div class="industry-card fade-in"><span class="industry-card__icon">🔧</span><h3>Sanitärtechnik</h3></div>
+                <div class="industry-card fade-in"><span class="industry-card__icon">🏗️</span><h3>Bauwesen</h3></div>
+                <div class="industry-card fade-in"><span class="industry-card__icon">🌬️</span><h3>Windenergie</h3></div>
+                <div class="industry-card fade-in"><span class="industry-card__icon">🏠</span><h3>Wohnungsabnahme</h3></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners -->
+    <section class="section section--light-alt">
+        <div class="container">
+            <div class="section__header fade-in"><h2>Unsere Partner.</h2></div>
+            <div class="partners__logos fade-in">
+                <img src="assets/images/partners/DigitalerMittelstand.png" alt="Digitaler Mittelstand">
+                <img src="assets/images/partners/Logo_0001_Ebene-16.png" alt="Partner">
+                <img src="assets/images/partners/Logo_0011_Ebene-6.png" alt="Partner">
+                <img src="assets/images/partners/Logo_0008_Ebene-9.png" alt="Partner">
+                <img src="assets/images/partners/Logo_0006_Ebene-12.png" alt="Partner">
+            </div>
+        </div>
+    </section>
+
+    <section class="section cta-section">
+        <div class="container"><div class="cta-section__content fade-in">
+            <h2>Bereit für den nächsten Schritt?</h2>
+            <p>Testen Sie SERIWA 30 Tage kostenlos.</p>
+            <a href="#" onclick="switchPage('kontakt');return false;" class="btn">Jetzt kostenlos testen</a>
+        </div></div>
+    </section>
+
+</main>
+</div>
+
+<!-- ==================== PAGE: KONTAKT ==================== -->
+<div class="page-tab" id="page-kontakt">
+<main role="main">
+
+    <section class="page-hero">
+        <div class="container"><div class="page-hero__content fade-in">
+            <h1>Jede gute Beziehung beginnt mit dem Dialog.</h1>
+            <p>Ob Demo, Beratung oder konkretes Projekt — wir sind für Sie da.</p>
+        </div></div>
+    </section>
+
+    <!-- Contact Form + Info -->
+    <section class="section section--dark">
+        <div class="container">
+            <div class="contact__grid fade-in">
+                <form class="contact-form" novalidate onsubmit="return false;">
+                    <div class="form-group">
+                        <label for="k-name">Name *</label>
+                        <input type="text" id="k-name" placeholder="Ihr vollständiger Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="k-company">Unternehmen</label>
+                        <input type="text" id="k-company" placeholder="Firmenname">
+                    </div>
+                    <div class="form-group">
+                        <label for="k-email">E-Mail *</label>
+                        <input type="email" id="k-email" placeholder="ihre@email.de">
+                    </div>
+                    <div class="form-group">
+                        <label for="k-message">Nachricht *</label>
+                        <textarea id="k-message" placeholder="Wie können wir Ihnen helfen?"></textarea>
+                    </div>
+                    <div class="form-checkbox">
+                        <input type="checkbox" id="k-privacy">
+                        <label for="k-privacy">Ich stimme der Verarbeitung meiner Daten gemäß der <a href="#" style="color: var(--color-accent);">Datenschutzerklärung</a> zu. *</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        Nachricht senden
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+                    </button>
+                </form>
+                <div class="contact-info">
+                    <h3>PCA Mobile GmbH</h3>
+                    <div class="contact-info__item">
+                        <div class="contact-info__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+                        <div class="contact-info__text"><p>Emanuel-Leutze-Str. 21</p><p>D-40547 Düsseldorf</p></div>
+                    </div>
+                    <div class="contact-info__item">
+                        <div class="contact-info__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></div>
+                        <div class="contact-info__text"><p>+49 (0) 211 936 790 60</p><small>Mo–Fr, 08:00–17:30 Uhr</small></div>
+                    </div>
+                    <div class="contact-info__item">
+                        <div class="contact-info__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg></div>
+                        <div class="contact-info__text"><p>kontakt@pcamobile.de</p><small>Antwort innerhalb von 24 Stunden</small></div>
+                    </div>
+                    <div class="contact-info__item">
+                        <div class="contact-info__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 01-8 0"/></svg></div>
+                        <div class="contact-info__text"><p>Fax: +49 (0) 211 936 790 61</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Google Maps -->
+    <section class="section section--light" style="padding-top: 0;">
+        <div class="container">
+            <div class="map-embed fade-in">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2498.5!2d6.7386278!3d51.2452103!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47b8b7c0e2a2e0e7%3A0x0!2sEmanuel-Leutze-Str.+21%2C+40547+D%C3%BCsseldorf!5e0!3m2!1sde!2sde!4v1" allowfullscreen="" loading="lazy" title="PCA Mobile Standort"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trial CTA -->
+    <section class="trial-cta">
+        <div class="container">
+            <div class="trial-cta__inner fade-in">
+                <div>
+                    <h2>Heute bestellt. Morgen läuft's.</h2>
+                    <p>Testen Sie SERIWA 30 Tage kostenlos — unverbindlich und ohne Risiko.</p>
+                </div>
+                <a href="mailto:kontakt@pcamobile.de?subject=Testzugang%20SERIWA" class="btn btn-primary">Testzugang anfragen →</a>
+            </div>
+        </div>
+    </section>
+
+</main>
+</div>
+
+<!-- Footer -->
+<footer class="site-footer" role="contentinfo">
+    <div class="footer__main">
+        <div class="container">
+            <div class="footer__grid">
+                <div class="footer__brand">
+                    <img src="assets/images/logo/pcamobile_nav.png" alt="PCA Mobile" style="height: 36px; width: auto; margin-bottom: 0.5rem;">
+                    <p>Enterprise Mobility Solutions für Logistik, Service und Außendienst. Seit über 20 Jahren Ihr Partner für digitale Prozesse.</p>
+                </div>
+                <div class="footer__col">
+                    <h4>Plattform</h4>
+                    <ul>
+                        <li><a href="#" onclick="switchPage('plattform');return false;">SERIWA</a></li>
+                        <li><a href="#" onclick="switchPage('plattform');return false;">Features</a></li>
+                        <li><a href="#" onclick="switchPage('unternehmen');return false;">Branchen</a></li>
+                        <li><a href="#" onclick="switchPage('kontakt');return false;">Demo anfragen</a></li>
+                    </ul>
+                </div>
+                <div class="footer__col">
+                    <h4>Unternehmen</h4>
+                    <ul>
+                        <li><a href="#" onclick="switchPage('unternehmen');return false;">Über uns</a></li>
+                        <li><a href="#">News</a></li>
+                        <li><a href="#" onclick="switchPage('kontakt');return false;">Kontakt</a></li>
+                        <li><a href="#" onclick="switchPage('services');return false;">Services</a></li>
+                    </ul>
+                </div>
+                <div class="footer__col">
+                    <h4>Rechtliches</h4>
+                    <ul>
+                        <li><a href="#">Impressum</a></li>
+                        <li><a href="#">Datenschutz</a></li>
+                        <li><a href="#">AGB</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="footer__bottom">
+            <span>&copy; 2026 PCA Mobile GmbH. Alle Rechte vorbehalten.</span>
+            <div class="footer__social">
+                <a href="https://www.linkedin.com/company/pca-mobile/" target="_blank" rel="noopener" aria-label="LinkedIn">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                </a>
+                <a href="https://www.xing.com/pages/pcamobilegmbh" target="_blank" rel="noopener" aria-label="Xing">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.188 0c-.517 0-.741.325-.927.66 0 0-7.455 13.224-7.702 13.657.015.024 4.919 9.023 4.919 9.023.17.308.436.66.967.66h3.454c.211 0 .375-.078.463-.22.089-.151.089-.346-.009-.536l-4.879-8.916c-.004-.006-.004-.016 0-.022L22.139.756c.095-.191.097-.387.006-.535C22.056.078 21.894 0 21.686 0h-3.498zM3.648 4.74c-.211 0-.385.074-.473.216-.09.149-.078.339.02.531l2.34 4.05c.004.01.004.016 0 .021L3.169 13.9c-.09.191-.088.389.006.531.087.142.255.224.463.224h3.454c.517 0 .752-.322.929-.66 0 0 2.376-4.318 2.452-4.465-.014-.025-2.385-4.135-2.385-4.135-.17-.308-.42-.66-.95-.66H3.648z"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Liquid Glass SVG Filter -->
+<svg style="display:none;">
+    <defs>
+        <filter id="liquid-glass" x="0%" y="0%" width="100%" height="100%" color-interpolation-filters="sRGB">
+            <feTurbulence type="fractalNoise" baseFrequency="0.05 0.05" numOctaves="1" seed="1" result="turbulence"/>
+            <feGaussianBlur in="turbulence" stdDeviation="2" result="blurredNoise"/>
+            <feDisplacementMap in="SourceGraphic" in2="blurredNoise" scale="70" xChannelSelector="R" yChannelSelector="B" result="displaced"/>
+            <feGaussianBlur in="displaced" stdDeviation="4" result="finalBlur"/>
+            <feComposite in="finalBlur" in2="finalBlur" operator="over"/>
+        </filter>
+    </defs>
+</svg>
+
+<script>
+function switchPage(page) {
+    document.querySelectorAll('.page-tab').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-bar button').forEach(b => b.classList.remove('active'));
+    document.getElementById('page-' + page).classList.add('active');
+    document.querySelector('[data-page="' + page + '"]').classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+document.querySelectorAll('.tab-bar button').forEach(btn => {
+    btn.addEventListener('click', () => switchPage(btn.dataset.page));
+});
+
+// --- Premium Layered Beams + Noise ---
+(function() {
+    const beamCanvas = document.getElementById('hero-beams');
+    const noiseCanvas = document.getElementById('hero-noise');
+    if (!beamCanvas || !noiseCanvas) return;
+
+    const bCtx = beamCanvas.getContext('2d');
+    const nCtx = noiseCanvas.getContext('2d');
+    const LAYERS = 3, BPL = 8;
+    let beams = [], animId = 0, W = 0, H = 0;
+
+    function createBeam(w, h, layer) {
+        return {
+            x: Math.random()*w, y: Math.random()*h,
+            width: 10+layer*5+Math.random()*15, length: h*2.5,
+            angle: -35+Math.random()*10,
+            speed: 0.2+layer*0.2+Math.random()*0.2,
+            opacity: 0.08+layer*0.05+Math.random()*0.1,
+            pulse: Math.random()*Math.PI*2,
+            pulseSpeed: 0.01+Math.random()*0.015,
+            layer: layer,
+        };
+    }
+
+    function sizeCanvases() {
+        const dpr = window.devicePixelRatio||1;
+        const rect = beamCanvas.parentElement.getBoundingClientRect();
+        W = rect.width; H = rect.height;
+        [beamCanvas, noiseCanvas].forEach(c => {
+            c.width=W*dpr; c.height=H*dpr;
+            c.style.width=W+'px'; c.style.height=H+'px';
+        });
+        bCtx.setTransform(window.devicePixelRatio||1,0,0,window.devicePixelRatio||1,0,0);
+        nCtx.setTransform(window.devicePixelRatio||1,0,0,window.devicePixelRatio||1,0,0);
+        beams = [];
+        for (let l=1;l<=LAYERS;l++) for (let i=0;i<BPL;i++) beams.push(createBeam(W,H,l));
+    }
+
+    function generateNoise() {
+        const img = nCtx.createImageData(noiseCanvas.width, noiseCanvas.height);
+        const d = img.data;
+        for (let i=0;i<d.length;i+=4) { const v=Math.random()*255; d[i]=v;d[i+1]=v;d[i+2]=v;d[i+3]=12; }
+        nCtx.putImageData(img,0,0);
+    }
+
+    function drawBeam(beam) {
+        bCtx.save();
+        bCtx.translate(beam.x, beam.y);
+        bCtx.rotate((beam.angle*Math.PI)/180);
+        const po = Math.min(1, beam.opacity*(0.8+Math.sin(beam.pulse)*0.4));
+        const g = bCtx.createLinearGradient(0,0,0,beam.length);
+        g.addColorStop(0,'rgba(6,147,227,0)');
+        g.addColorStop(0.2,'rgba(6,147,227,'+(po*0.5)+')');
+        g.addColorStop(0.5,'rgba(6,147,227,'+po+')');
+        g.addColorStop(0.8,'rgba(6,147,227,'+(po*0.5)+')');
+        g.addColorStop(1,'rgba(6,147,227,0)');
+        bCtx.fillStyle = g;
+        bCtx.filter = 'blur('+(2+beam.layer*2)+'px)';
+        bCtx.fillRect(-beam.width/2,0,beam.width,beam.length);
+        bCtx.restore();
+    }
+
+    function animate() {
+        bCtx.filter='none';
+        const bg = bCtx.createLinearGradient(0,0,0,H);
+        bg.addColorStop(0,'#050508'); bg.addColorStop(1,'#0a0f1a');
+        bCtx.fillStyle=bg; bCtx.fillRect(0,0,W,H);
+        beams.forEach(beam => {
+            beam.y -= beam.speed*(beam.layer/LAYERS+0.5);
+            beam.pulse += beam.pulseSpeed;
+            if (beam.y+beam.length < -50) { beam.y=H+50; beam.x=Math.random()*W; }
+            drawBeam(beam);
+        });
+        generateNoise();
+        animId = requestAnimationFrame(animate);
+    }
+
+    sizeCanvases(); animate();
+    window.addEventListener('resize', () => { cancelAnimationFrame(animId); animId=0; sizeCanvases(); animate(); });
+})();
+
+// Mobile nav
+const toggle = document.querySelector('.nav-toggle');
+const menu = document.querySelector('.nav-menu');
+if (toggle && menu) {
+    toggle.addEventListener('click', () => {
+        toggle.classList.toggle('active');
+        menu.classList.toggle('active');
+    });
+}
+</script>
+
+</body>
+</html>
