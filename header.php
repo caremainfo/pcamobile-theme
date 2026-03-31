@@ -47,6 +47,7 @@
  */
 function pcamobile_fallback_menu() {
     echo '<a href="' . esc_url(home_url('/plattform/')) . '">SERIWA</a>';
+    echo '<a href="' . esc_url(home_url('/hardware/')) . '">Hardware</a>';
     echo '<a href="' . esc_url(home_url('/services/')) . '">Services</a>';
     echo '<a href="' . esc_url(home_url('/unternehmen/')) . '">Unternehmen</a>';
     echo '<a href="' . esc_url(home_url('/kontakt/')) . '">Kontakt</a>';
